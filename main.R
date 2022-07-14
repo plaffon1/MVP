@@ -1,11 +1,19 @@
 library(shiny)
+library(readr)
 
-ui <- fluidPage(
+source("modules/data_page.R")
 
-)
-
-server <- function(input,output,session) {
-
+main <- function() {
+  ui <- navbarPage(
+    title = "HyperOpus v1.0.0",
+    tabPanel("Data",data_page_ui("data")),
+    tabPanel("Analysis", ""),
+    tabPanel("Workflows", "")
+  )
+  server <- function(input, output, session) {
+    data_page_server("data")
+  }
+  shinyApp(ui,server)
 }
 
-shinyApp(ui,server)
+main()
